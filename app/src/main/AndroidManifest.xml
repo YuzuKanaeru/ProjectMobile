@@ -14,6 +14,8 @@
         android:theme="@style/Theme.ProjectSIVosis"
         tools:targetApi="31">
 
+        <activity android:name=".DetailKandidat"
+            android:exported="false"/>
         <activity android:name=".DaftarKandidat"
             android:exported="false"/>
         <activity android:name=".Petunjuk"
