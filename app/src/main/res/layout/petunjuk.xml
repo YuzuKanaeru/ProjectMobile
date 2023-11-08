@@ -89,7 +89,7 @@
         android:layout_height="53dp"
         android:layout_marginTop="6dp"
         android:fontFamily="@font/poppinsregular"
-        android:text="3.Setelah itu klik tombol Pilih yang ada di pasangan calon favorite anda"
+        android:text="3.Setelah itu klik gambar paslon favorite anda untuk melaju ke tahap berikutnya"
         android:textSize="17dp"
         app:layout_constraintEnd_toEndOf="@+id/textView4"
         app:layout_constraintHorizontal_bias="0.0"
@@ -137,23 +137,26 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="338dp"
+        android:layout_height="56dp"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3"
-        app:srcCompat="@drawable/lanjutvote" />
+        app:srcCompat="@drawable/login" />
 
     <Button
         android:id="@+id/btnkndt"
-        android:layout_width="339dp"
-        android:layout_height="51dp"
+        android:layout_width="328dp"
+        android:layout_height="61dp"
         android:layout_marginTop="20dp"
         android:background="?attr/selectableItemBackground"
-        android:text=""
+        android:fontFamily="@font/poppinssemibold"
+        android:text="Lanjutkan Voting"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 </androidx.constraintlayout.widget.ConstraintLayout>
