@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace = "com.projects3.projectsivosis"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.projects3.projectsivosis"
@@ -34,11 +34,14 @@ android {
 dependencies {
 
     implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.9.0")
+    implementation("com.google.android.material:material:1.10.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation ("com.google.zxing:core:3.3.3")
     implementation ("com.google.zxing:core:3.4.1")
-    implementation ("androidx.recyclerview:recyclerview:1.2.1")
+    implementation ("com.google.zxing:core:3.4.1")
+    implementation ("androidx.recyclerview:recyclerview:1.3.2")
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation ("com.squareup.okhttp3:okhttp:4.9.1")
     implementation ("com.journeyapps:zxing-android-embedded:4.3.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
