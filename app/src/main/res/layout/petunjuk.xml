@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/biru">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/poppinssemibold"
+        android:text="Petunjuk Penggunaan"
+        android:textColor="@color/white"
+        android:textSize="22dp"/>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="700dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="15dp"
+        android:minHeight="16dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="4dp"
+        tools:ignore="ExtraText">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/poppinssemibold"
+            android:text="Panduan memilih Pasangan Calon"
+            android:textColor="@color/birutua"
+            android:textSize="19dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="53dp"
+            android:fontFamily="@font/poppinsregular"
+            android:textColor="@color/black"
+            android:text="Berikut ini ini langkah - langkah yang harus anda lalui untuk memilih pasangan calon favorite anda :"
+            android:textSize="19dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="160dp"
+            android:fontFamily="@font/poppinsregular"
+            android:textColor="@color/black"
+            android:text="1. Anda telah melewati langkah pertama yaitu login pada sistem"
+            android:textSize="19dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="220dp"
+            android:fontFamily="@font/poppinsregular"
+            android:textColor="@color/black"
+            android:text="2. Langkah selanjutnya klik Tombol Lanjutkan Voting dibawah"
+            android:textSize="19dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="280dp"
+            android:fontFamily="@font/poppinsregular"
+            android:textColor="@color/black"
+            android:text="3. Setelah itu pilih paslon favorit anda untuk melaju ke tahap berikutnya"
+            android:textSize="19dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="365dp"
+            android:fontFamily="@font/poppinsregular"
+            android:textColor="@color/black"
+            android:text="4. Lalu silahkan klik Vote untuk memilih calon pasangan"
+            android:textSize="19dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="420dp"
+            android:fontFamily="@font/poppinsregular"
+            android:textColor="@color/black"
+            android:text="5. Langkah terakhir klik Iya pada pesan konfirmasi untuk memilih calon, klik Tidak jika ingin membatalkan"
+            android:textSize="19dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="530dp"
+            android:fontFamily="@font/poppinsregular"
+            android:textColor="@color/black"
+            android:text="6. Selamat anda telah memilih pasangan favorite anda"
+            android:textSize="19dp"/>
+
+        <Button
+            android:id="@+id/btnkndt"
+            android:layout_width="292dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="620dp"
+            android:background="@drawable/custom_button"
+            android:fontFamily="@font/poppinssemibold"
+            android:textColor="@color/white"
+            android:textSize="15dp"
+            android:text="Lanjutkan Voting" />
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
