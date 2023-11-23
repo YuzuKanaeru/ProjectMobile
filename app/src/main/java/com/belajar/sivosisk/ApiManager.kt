@@ -19,6 +19,7 @@ class ApiManager {
         return apiService.loginWithQrScan()
     }
 
-    val dataList: Call<List<KandidatResponse>>
-        get() = apiService.dataList
+    fun getDataKandidat(): Call<List<KandidatResponse>> {
+        return apiService.getDataKandidat()
+}
 }

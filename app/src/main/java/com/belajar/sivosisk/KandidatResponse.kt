@@ -2,16 +2,16 @@ package com.belajar.sivosisk
 
 import com.google.gson.annotations.SerializedName
 
-class KandidatResponse {
+data class KandidatResponse(
     @SerializedName("id_kandidat")
-    private val id_kandidat = 0
+    val id_kandidat: Int,
 
     @SerializedName("nama_ketua")
-    private val nama_ketua: String? = null
+    val nama_ketua: String?,
 
     @SerializedName("nama_wakil")
-    private val nama_wakil: String? = null
+    val nama_wakil: String?,
 
     @SerializedName("gambar")
-    private val gambar: String? = null
-}
+    val gambar: String?
+)

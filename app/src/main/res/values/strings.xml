@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">SI Vosis</string>
+
+    <style name="rounded">
+        <item name="cornerSize">
+            15dp
+        </item>
+    </style>
 </resources>

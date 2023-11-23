@@ -55,16 +55,16 @@ class Login : AppCompatActivity() {
 
     private fun scanCode() {
         val options = ScanOptions().apply {
-            var prompt = "Volume up to flash on"
-            var isBeepEnabled = false
-            var isOrientationLocked = true
+            setPrompt("Volume up to flash on")
+            setBeepEnabled(false)
+            setOrientationLocked(true)
             captureActivity = CaptureAct::class.java
         }
         barLauncher.launch(options)
     }
 
     private fun handleScanResult(scanResult: String) {
-        Toast.makeText(this, "Hasil Pemindaian: $scanResult", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Berhasil Login dengan NIS: $scanResult", Toast.LENGTH_SHORT).show()
 
         apiManager?.loginWithQrScan()?.enqueue(object : Callback<List<akun>> {
             override fun onResponse(call: Call<List<akun>>, response: Response<List<akun>>) {

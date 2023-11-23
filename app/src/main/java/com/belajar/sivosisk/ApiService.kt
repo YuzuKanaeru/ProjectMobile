@@ -8,6 +8,6 @@ interface ApiService {
     @POST("akun.php")
     fun loginWithQrScan(): Call<List<akun>>
 
-    @get:GET("datakandidat.php")
-    val dataList: Call<List<KandidatResponse>>
+    @GET("datakandidat.php")
+    fun getDataKandidat(): Call<List<KandidatResponse>>
 }

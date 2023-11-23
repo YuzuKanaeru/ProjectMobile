@@ -1,50 +1,63 @@
 package com.belajar.sivosisk
-import android.content.Intent
+
+import Kandidat
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class DaftarKandidat : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var kandidatAdapter: KandidatAdapter
 
+    private val apiManager = ApiManager()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.daftarkandidat)
 
-        // Fetch or create a list of candidates
-        val kandidatList: List<Kandidat> = getKandidatList()
-
         recyclerView = findViewById(R.id.recyclerView)
-        kandidatAdapter = KandidatAdapter(this, kandidatList)
+        kandidatAdapter = KandidatAdapter(this, mutableListOf())
         recyclerView.adapter = kandidatAdapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // Handle item click
-        kandidatAdapter.setOnItemClickListener(object : KandidatAdapter.OnItemClickListener {
-            override fun onItemClick(position: Int) {
-                // Handle item click, for example, start DetailKandidat activity
-                val selectedKandidat: Kandidat = kandidatList[position]
+        // Fetch data from API and update the adapter
+        fetchDataFromApi()
+    }
 
-                val detailIntent = Intent(this@DaftarKandidat, DetailKandidat::class.java)
-                detailIntent.putExtra("kandidat_id", selectedKandidat.id)
-                detailIntent.putExtra("kandidat_name", selectedKandidat.nama)
-                detailIntent.putExtra("kandidat_image", selectedKandidat.gambar)
-                startActivity(detailIntent)
+    private fun fetchDataFromApi() {
+        apiManager.getDataKandidat().enqueue(object : Callback<List<KandidatResponse>> {
+            override fun onResponse(
+                call: Call<List<KandidatResponse>>,
+                response: Response<List<KandidatResponse>>
+            ) {
+                if (response.isSuccessful) {
+                    val kandidatList = response.body() ?: emptyList()
+                    val mappedList = kandidatList.map {
+                        Kandidat(
+                            it.id_kandidat,
+                            it.nama_ketua ?: "",
+                            it.nama_wakil ?: "",
+                            "",
+                            "",
+                            it.gambar ?: "default_image_url"
+                        )
+                    }
+                    updateAdapter(mappedList)
+                }
+            }
+
+            override fun onFailure(call: Call<List<KandidatResponse>>, t: Throwable) {
+                // Handle failure (e.g., show an error message)
             }
         })
     }
 
-    private fun getKandidatList(): List<Kandidat> {
-        val kandidatList = mutableListOf<Kandidat>()
-
-        kandidatList.add(Kandidat(1, "Kandidat 1", "", "", R.drawable.kobo))
-        kandidatList.add(Kandidat(2, "Kandidat 2", "", "", R.drawable.mua))
-        kandidatList.add(Kandidat(3, "Kandidat 3", "", "", R.drawable.hutaomerah))
-        kandidatList.add(Kandidat(4, "Kandidat 4", "", "", R.drawable.toshi))
-
-        return kandidatList
+    private fun updateAdapter(kandidatList: List<Kandidat>) {
+        kandidatAdapter.setData(kandidatList)
     }
 }

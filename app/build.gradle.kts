@@ -51,6 +51,7 @@ dependencies {
     implementation ("com.journeyapps:zxing-android-embedded:4.3.0")
     implementation ("com.journeyapps:zxing-android-embedded:4.0.0")
     implementation ("com.budiyev.android:code-scanner:2.1.0")
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
 
 
     testImplementation("junit:junit:4.13.2")
