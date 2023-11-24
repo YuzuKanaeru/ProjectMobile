@@ -1,6 +1,7 @@
 package com.belajar.sivosisk
 
 import Kandidat
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,11 +23,31 @@ class DaftarKandidat : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.recyclerView)
         kandidatAdapter = KandidatAdapter(this, mutableListOf())
+
+        // Set the adapter and layout manager to the RecyclerView
         recyclerView.adapter = kandidatAdapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         // Fetch data from API and update the adapter
         fetchDataFromApi()
+
+        // Set item click listener for handling clicks on RecyclerView items
+        // Inside DaftarKandidat
+        kandidatAdapter.setOnItemClickListener(object : KandidatAdapter.OnItemClickListener {
+            override fun onItemClick(position: Int, kandidat: Kandidat) {
+                // Pass the clicked Kandidat object to the DetailKandidat activity
+                val intent = Intent(this@DaftarKandidat, DetailKandidat::class.java).apply {
+                    putExtra("kandidat_id", kandidat.id)
+                    putExtra("kandidat_name", kandidat.namaKetua)
+                    putExtra("kandidat_wakil", kandidat.namaWakil)
+                    putExtra("kandidat_image", kandidat.gambar)
+                    putExtra("kandidat_visi", kandidat.visi)
+                    putExtra("kandidat_misi", kandidat.misi)
+                }
+                startActivity(intent)
+            }
+        })
+
     }
 
     private fun fetchDataFromApi() {
@@ -42,8 +63,8 @@ class DaftarKandidat : AppCompatActivity() {
                             it.id_kandidat,
                             it.nama_ketua ?: "",
                             it.nama_wakil ?: "",
-                            "",
-                            "",
+                            it.visi ?: "",
+                            it.misi ?: "",
                             it.gambar ?: "default_image_url"
                         )
                     }

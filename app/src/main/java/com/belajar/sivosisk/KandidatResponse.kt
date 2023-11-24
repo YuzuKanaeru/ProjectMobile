@@ -12,6 +12,13 @@ data class KandidatResponse(
     @SerializedName("nama_wakil")
     val nama_wakil: String?,
 
+    @SerializedName("visi")
+    val visi: String?,  // Tambahkan sesuai dengan respons API
+
+    @SerializedName("misi")
+    val misi: String?,  // Tambahkan sesuai dengan respons API
+
     @SerializedName("gambar")
     val gambar: String?
 )
+

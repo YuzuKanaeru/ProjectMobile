@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.bumptech.glide.Glide
 
 class DetailKandidat : AppCompatActivity() {
 
@@ -24,17 +25,23 @@ class DetailKandidat : AppCompatActivity() {
         }
 
         // Dapatkan data dari intent
-        val kandidatId = intent.getIntExtra("kandidat_id", -1)
         val kandidatName = intent.getStringExtra("kandidat_name")
-        val kandidatImageResId = intent.getIntExtra("kandidat_image", -1)
+        val kandidatWakil = intent.getStringExtra("kandidat_wakil")
+        val kandidatImage = intent.getStringExtra("kandidat_image")
         val kandidatVisi = intent.getStringExtra("kandidat_visi")
         val kandidatMisi = intent.getStringExtra("kandidat_misi")
 
-        val nameTextView: TextView = findViewById(R.id.detail_kandidat_name)
-        val imageView: ImageView = findViewById(R.id.detail_kandidat_image)
-
-        nameTextView.text = kandidatName
-        imageView.setImageResource(kandidatImageResId)
+        // Update your UI components with the retrieved data
+        findViewById<TextView>(R.id.textViewKandidatName).text = kandidatName
+        findViewById<TextView>(R.id.textViewKandidatWakil).text = kandidatWakil
+        // Use a library like Glide to load images efficiently
+        Glide.with(this)
+            .load(kandidatImage)
+            .placeholder(R.drawable.mua) // placeholder image
+            .error(R.drawable.error) // error image
+            .into(findViewById<ImageView>(R.id.imageViewKandidat))
+        findViewById<TextView>(R.id.textViewKandidatVisi).text = kandidatVisi
+        findViewById<TextView>(R.id.textViewKandidatMisi).text = kandidatMisi
     }
 
     private fun showWarningAlertDialog() {

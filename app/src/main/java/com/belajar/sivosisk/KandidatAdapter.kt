@@ -15,9 +15,11 @@ class KandidatAdapter(private val context: Context, private var kandidatList: Li
 
     private var itemClickListener: OnItemClickListener? = null
 
+    // Inside KandidatAdapter
     interface OnItemClickListener {
-        fun onItemClick(position: Int)
+        fun onItemClick(position: Int, kandidat: Kandidat)
     }
+
 
     fun setOnItemClickListener(listener: OnItemClickListener) {
         this.itemClickListener = listener
@@ -28,6 +30,7 @@ class KandidatAdapter(private val context: Context, private var kandidatList: Li
         return KandidatViewHolder(view)
     }
 
+    // Inside KandidatAdapter
     override fun onBindViewHolder(holder: KandidatViewHolder, position: Int) {
         val kandidat = kandidatList[position]
         holder.namaKandidat.text = kandidat.namaKetua
@@ -36,9 +39,10 @@ class KandidatAdapter(private val context: Context, private var kandidatList: Li
 
         // Set the click listener on the itemView
         holder.itemView.setOnClickListener {
-            itemClickListener?.onItemClick(position)
+            itemClickListener?.onItemClick(position, kandidat)
         }
     }
+
 
     override fun getItemCount(): Int {
         return kandidatList.size
