@@ -7,5 +7,4 @@ class Kandidat(
     val misi: String,
     val gambar: String
 ) {
-    // Initialize other properties as needed
 }

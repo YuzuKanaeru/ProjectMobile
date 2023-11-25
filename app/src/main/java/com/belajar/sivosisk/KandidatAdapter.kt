@@ -15,7 +15,6 @@ class KandidatAdapter(private val context: Context, private var kandidatList: Li
 
     private var itemClickListener: OnItemClickListener? = null
 
-    // Inside KandidatAdapter
     interface OnItemClickListener {
         fun onItemClick(position: Int, kandidat: Kandidat)
     }
@@ -30,14 +29,12 @@ class KandidatAdapter(private val context: Context, private var kandidatList: Li
         return KandidatViewHolder(view)
     }
 
-    // Inside KandidatAdapter
     override fun onBindViewHolder(holder: KandidatViewHolder, position: Int) {
         val kandidat = kandidatList[position]
         holder.namaKandidat.text = kandidat.namaKetua
         holder.namawakil.text = kandidat.namaWakil
         holder.setData(kandidat.gambar)
 
-        // Set the click listener on the itemView
         holder.itemView.setOnClickListener {
             itemClickListener?.onItemClick(position, kandidat)
         }
@@ -59,21 +56,18 @@ class KandidatAdapter(private val context: Context, private var kandidatList: Li
             namaKandidat = itemView.findViewById(R.id.namaKandidat)
             namawakil = itemView.findViewById(R.id.namawakil)
 
-            // Set this as the OnClickListener for the itemView
             itemView.setOnClickListener(this)
         }
 
         fun setData(gambar: String) {
-            // Use a library like Glide to load images efficiently
             Glide.with(itemView.context)
                 .load(gambar)
-                .placeholder(R.drawable.mua) // placeholder image
-                .error(R.drawable.error) // error image
+                .placeholder(R.drawable.mua)
+                .error(R.drawable.error)
                 .into(fotoKandidat)
         }
 
         override fun onClick(view: View) {
-            // Handle item click if needed
         }
     }
 
