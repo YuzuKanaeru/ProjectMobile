@@ -44,24 +44,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppinssemibold"
-            android:textColor="@color/black"
-            android:text="" />
+            android:textColor="@color/black" />
 
-    <TextView
-        android:id="@+id/visi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text=""
-        android:textSize="16sp" />
+<!--    <TextView-->
+<!--        android:id="@+id/visi"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        android:text=""-->
+<!--        android:textSize="16sp" />-->
 
-    <TextView
-        android:id="@+id/misi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text=""
-        android:textSize="16sp" />
+<!--    <TextView-->
+<!--        android:id="@+id/misi"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="4dp"-->
+<!--        android:text=""-->
+<!--        android:textSize="16sp" />-->
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

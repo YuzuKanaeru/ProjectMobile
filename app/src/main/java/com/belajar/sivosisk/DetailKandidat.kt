@@ -19,7 +19,6 @@ class DetailKandidat : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.detailkandidat)
-
         findViewById<Button>(R.id.btnvote).setOnClickListener {
             showWarningAlertDialog()
         }
@@ -32,7 +31,6 @@ class DetailKandidat : AppCompatActivity() {
         val kandidatVisi = intent.getStringExtra("kandidat_visi")
         val kandidatMisi = intent.getStringExtra("kandidat_misi")
 
-        // Update your UI components with the retrieved data
         findViewById<TextView>(R.id.textViewKandidatId).text = "$kandidatId"
         findViewById<TextView>(R.id.textViewKandidatName).text = kandidatName
         findViewById<TextView>(R.id.textViewKandidatWakil).text = kandidatWakil
@@ -86,8 +84,9 @@ class DetailKandidat : AppCompatActivity() {
 
         view.findViewById<TextView>(R.id.textTittle).text = "Pemberitahuan"
         view.findViewById<TextView>(R.id.textMessage).text = "Terima Kasih Telah Voting"
-        view.findViewById<Button>(R.id.buttonAct).text = "Oke"
         view.findViewById<ImageView>(R.id.imgicon).setImageResource(R.drawable.done)
+        view.findViewById<Button>(R.id.buttonAct).text = "Oke"
+
 
         val alertDialog = builder.create()
 
