@@ -64,7 +64,7 @@ class Login : AppCompatActivity() {
     }
 
     private fun handleScanResult(scanResult: String) {
-        Toast.makeText(this, "Berhasil Login dengan NIS: $scanResult", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Login Berhasil", Toast.LENGTH_SHORT).show()
 
         apiManager?.loginWithQrScan()?.enqueue(object : Callback<List<akun>> {
             override fun onResponse(call: Call<List<akun>>, response: Response<List<akun>>) {

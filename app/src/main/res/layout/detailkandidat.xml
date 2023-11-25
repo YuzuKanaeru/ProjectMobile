@@ -12,11 +12,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/poppinssemibold"
         android:text="Detail Kandidat"
         android:textColor="@color/white"
         android:textSize="22dp" />
+
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -114,6 +115,12 @@
             android:textColor="@color/white"
             android:textSize="15dp"
             tools:ignore="Warning" />
+
+            <TextView
+                android:id="@+id/textViewKandidatId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10000dp"/>
 
         </LinearLayout>
 

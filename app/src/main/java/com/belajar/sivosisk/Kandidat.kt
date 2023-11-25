@@ -1,4 +1,4 @@
-// Modify the Kandidat model to include namaKetua and namaWakil
+
 class Kandidat(
     val id: Int,
     val namaKetua: String,

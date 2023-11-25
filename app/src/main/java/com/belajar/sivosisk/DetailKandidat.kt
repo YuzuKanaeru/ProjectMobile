@@ -25,6 +25,7 @@ class DetailKandidat : AppCompatActivity() {
         }
 
         // Dapatkan data dari intent
+        val kandidatId = intent.getIntExtra("kandidat_id", -1)
         val kandidatName = intent.getStringExtra("kandidat_name")
         val kandidatWakil = intent.getStringExtra("kandidat_wakil")
         val kandidatImage = intent.getStringExtra("kandidat_image")
@@ -32,6 +33,7 @@ class DetailKandidat : AppCompatActivity() {
         val kandidatMisi = intent.getStringExtra("kandidat_misi")
 
         // Update your UI components with the retrieved data
+        findViewById<TextView>(R.id.textViewKandidatId).text = "$kandidatId"
         findViewById<TextView>(R.id.textViewKandidatName).text = kandidatName
         findViewById<TextView>(R.id.textViewKandidatWakil).text = kandidatWakil
         // Use a library like Glide to load images efficiently
