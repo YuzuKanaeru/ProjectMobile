@@ -72,6 +72,8 @@ class Login : AppCompatActivity() {
                     val user = findUserByNisNip(response.body()!!, scanResult)
 
                     if (user != null) {
+                        // Save scanResult in SharedPreferences
+                        saveScanResult(scanResult)
                         val intent = Intent(this@Login, Petunjuk::class.java)
                         startActivity(intent)
                     } else {
@@ -98,6 +100,14 @@ class Login : AppCompatActivity() {
                 ).show()
             }
         })
+    }
+
+    private fun saveScanResult(scanResult: String) {
+        val sharedPreferences: SharedPreferences =
+            getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("scanResult", scanResult)
+        editor.apply()
     }
 
     private fun findUserByNisNip(userList: List<akun>, nisNipToFind: String): akun? {
