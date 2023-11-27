@@ -1,6 +1,6 @@
 
 class Kandidat(
-    val id: Int,
+    val id: String,
     val namaKetua: String,
     val namaWakil: String,
     val visi: String,

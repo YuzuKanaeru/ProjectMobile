@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class KandidatResponse(
     @SerializedName("id_kandidat")
-    val id_kandidat: Int,
+    val id_kandidat: String?,
 
     @SerializedName("nama_ketua")
     val nama_ketua: String?,

@@ -54,7 +54,7 @@ class DaftarKandidat : AppCompatActivity() {
                     val kandidatList = response.body() ?: emptyList()
                     val mappedList = kandidatList.map {
                         Kandidat(
-                            it.id_kandidat,
+                            it.id_kandidat?: "",
                             it.nama_ketua ?: "",
                             it.nama_wakil ?: "",
                             it.visi ?: "",
