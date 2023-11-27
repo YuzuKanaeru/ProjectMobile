@@ -2,7 +2,6 @@ package com.belajar.sivosisk
 
 import com.google.gson.annotations.SerializedName
 
-class ApiResponse {
-    @SerializedName("status")
-    val status: String? = null
-}
+data class ApiResponse(
+    val message: String
+)
