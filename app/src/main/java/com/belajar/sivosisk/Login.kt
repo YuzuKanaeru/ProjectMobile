@@ -8,11 +8,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
-import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.appcompat.app.AppCompatActivity
-import com.journeyapps.barcodescanner.CaptureActivity
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanIntentResult
 import com.journeyapps.barcodescanner.ScanOptions
@@ -64,7 +61,6 @@ class Login : AppCompatActivity() {
     }
 
     private fun handleScanResult(scanResult: String) {
-        Toast.makeText(this, "Login Berhasil", Toast.LENGTH_SHORT).show()
 
         apiManager?.loginWithQrScan()?.enqueue(object : Callback<List<akun>> {
             override fun onResponse(call: Call<List<akun>>, response: Response<List<akun>>) {
@@ -72,10 +68,23 @@ class Login : AppCompatActivity() {
                     val user = findUserByNisNip(response.body()!!, scanResult)
 
                     if (user != null) {
-                        // Save scanResult in SharedPreferences
-                        saveScanResult(scanResult)
-                        val intent = Intent(this@Login, Petunjuk::class.java)
-                        startActivity(intent)
+                        if (user.id_posisi == "01") {
+                            Toast.makeText(
+                                this@Login,
+                                "Maaf, akun dengan posisi 'Admin' tidak diizinkan masuk",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else if (user.status == "Sudah Voting") {
+                            Toast.makeText(
+                                this@Login,
+                                "Maaf, akun sudah melakukan voting",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else {
+                            saveScanResult(scanResult)
+                            val intent = Intent(this@Login, Petunjuk::class.java)
+                            startActivity(intent)
+                        }
                     } else {
                         Toast.makeText(
                             this@Login,
@@ -101,6 +110,8 @@ class Login : AppCompatActivity() {
             }
         })
     }
+
+
 
     private fun saveScanResult(scanResult: String) {
         val sharedPreferences: SharedPreferences =
