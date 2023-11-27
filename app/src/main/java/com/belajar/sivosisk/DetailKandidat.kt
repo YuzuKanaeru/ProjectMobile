@@ -1,7 +1,9 @@
 package com.belajar.sivosisk
 
+import android.app.ActivityManager
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,6 +15,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.bumptech.glide.Glide
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class DetailKandidat : AppCompatActivity() {
 
@@ -20,11 +26,12 @@ class DetailKandidat : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.detailkandidat)
         findViewById<Button>(R.id.btnvote).setOnClickListener {
+
             showWarningAlertDialog()
         }
 
         // Dapatkan data dari intent
-        val kandidatId = intent.getIntExtra("kandidat_id", -1)
+        val kandidatId = intent.getStringExtra("kandidat_id")
         val kandidatName = intent.getStringExtra("kandidat_name")
         val kandidatWakil = intent.getStringExtra("kandidat_wakil")
         val kandidatImage = intent.getStringExtra("kandidat_image")
@@ -67,7 +74,6 @@ class DetailKandidat : AppCompatActivity() {
 
         view.findViewById<Button>(R.id.buttonNo).setOnClickListener {
             alertDialog.dismiss()
-            Toast.makeText(this, "Silahkan pilih kandidat anda", Toast.LENGTH_SHORT).show()
         }
 
         alertDialog.window?.setBackgroundDrawable(ColorDrawable(0))
@@ -86,16 +92,17 @@ class DetailKandidat : AppCompatActivity() {
         view.findViewById<TextView>(R.id.textMessage).text = "Terima Kasih Telah Voting"
         view.findViewById<ImageView>(R.id.imgicon).setImageResource(R.drawable.done)
         view.findViewById<Button>(R.id.buttonAct).text = "Oke"
-
+        sendVoting()
 
         val alertDialog = builder.create()
 
         view.findViewById<Button>(R.id.buttonAct).setOnClickListener {
             alertDialog.dismiss()
-            Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
-            val editor = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE).edit()
-            editor.putBoolean("hasVoted", true)
-            editor.apply()
+
+
+            clearSharedPreferences()
+
+            // Go back to the previous activity
             val intent = Intent(this, Login::class.java)
             startActivity(intent)
             finish()
@@ -103,5 +110,57 @@ class DetailKandidat : AppCompatActivity() {
 
         alertDialog.window?.setBackgroundDrawable(ColorDrawable(0))
         alertDialog.show()
+    }
+
+    private fun clearSharedPreferences() {
+        val sharedPreferences: SharedPreferences =
+            getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.clear()
+        editor.apply()
+        clearAllActivities()
+    }
+
+    fun clearAllActivities() {
+        val activityManager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        val tasks = activityManager.appTasks
+
+        for (task in tasks) {
+            task.finishAndRemoveTask()
+        }
+    }
+
+    private fun sendVoting() {
+        val kandidatId = findViewById<TextView>(R.id.textViewKandidatId).text.toString()
+        val sharedPreferences: SharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val scanResult: String? = sharedPreferences.getString("scanResult", "")
+
+        if (!scanResult.isNullOrBlank() && !kandidatId.isNullOrBlank()) {
+            val votingData = voting(nis_nip = scanResult, id_kandidat = kandidatId)
+
+            Toast.makeText(this, "${votingData}", Toast.LENGTH_SHORT).show()
+
+            val apiManager = ApiManager()
+
+            apiManager.sendVote(votingData).enqueue(object : Callback<ResponseBody> {
+                override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                    if (response.isSuccessful) {
+                        val responseBody = response.body()?.string() ?: ""
+                        // Handle the response body content accordingly
+                        Toast.makeText(this@DetailKandidat, "Response: $responseBody", Toast.LENGTH_SHORT).show()
+                    } else {
+                        // Handle unsuccessful response
+                        Toast.makeText(this@DetailKandidat, "Gagal mengirim vote", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    // Handle failure
+                    Toast.makeText(this@DetailKandidat, "Gagal mengunggah data: ${t.message}", Toast.LENGTH_SHORT).show()
+                }
+            })
+        } else {
+            Toast.makeText(this, "Data tidak lengkap", Toast.LENGTH_SHORT).show()
+        }
     }
 }
